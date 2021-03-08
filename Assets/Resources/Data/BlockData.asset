@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511469d468a04b341b06fed12d9a1388, type: 3}
+  m_Name: BlockData
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 5505496322575122995, guid: d1315cc76d00a194f95d285f72c138ca, type: 3}
+  ShutteredPrefab: {fileID: 0}
+  timeToReachPlayer: 3
+  spawnOffset: {x: 0, y: 0.5, z: 20}
+  moveDirection: {x: 0, y: 0, z: -1}
+  speed: 7
+  BlockMaterials:
+  - Note: 0
+    Material: {fileID: 2100000, guid: 67c47c9b9de6ded429168caa91f8d47a, type: 2}
+  - Note: 1
+    Material: {fileID: 2100000, guid: 95c107c8708cc514c9546d9bb273f6d1, type: 2}
+  - Note: 2
+    Material: {fileID: 2100000, guid: 1cc129903d1486240883a35f2ad1e816, type: 2}
+  - Note: 3
+    Material: {fileID: 2100000, guid: d21e926fd8f174f45850d792cc613661, type: 2}
+  PrewarmCount: 10
+  CollectTime: 0.2

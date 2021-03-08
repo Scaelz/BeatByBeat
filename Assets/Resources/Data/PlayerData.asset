@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd58ae2b11fbdf4f89f69ee3ef408d6, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1932106993026068052, guid: 81d057dd6c33c68449ffd7627e3ec378, type: 3}
+  startPosition: {x: -2.625, y: 0, z: 0}
+  speed: 0.45
+  TriggerTimeMilliseconds: 100
