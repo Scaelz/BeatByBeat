@@ -8,6 +8,7 @@ public class GlobalData : ScriptableObject
 {
     public string PlayerDataPath;
     public string BlockDataPath;
+    public string ScoreDataPath;
     private PlayerData _playerData;
     public PlayerData PlayerData
     {
@@ -30,6 +31,18 @@ public class GlobalData : ScriptableObject
                 _blockData = Load<BlockData>("Data/" + BlockDataPath);
             }
             return _blockData;
+        }
+    }
+    private ScoreData _scoreData;
+    public ScoreData ScoreData
+    {
+        get
+        {
+            if (_scoreData == null)
+            {
+                _scoreData = Load<ScoreData>("Data/" + ScoreDataPath);
+            }
+            return _scoreData;
         }
     }
     public T Load<T>(string path) where T : Object

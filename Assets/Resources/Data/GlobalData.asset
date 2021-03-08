@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerDataPath: PlayerData
   BlockDataPath: BlockData
+  ScoreDataPath: ScoreData
