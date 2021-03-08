@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using EventBusSystem;
 
 public class ScoreController : IController, INoteCollectedHandler
 {
     ScoreData _scoreData;
-    int _currentMultiplier;
+    int _currentMultiplier = 1;
     int _totalScore;
 
     public ScoreController(ScoreData scoreData)
@@ -48,10 +46,7 @@ public class ScoreController : IController, INoteCollectedHandler
         _totalScore += scoreArgs.CurrentIncome;
         scoreArgs.Total = _totalScore;
         scoreArgs.Multiplier = _currentMultiplier;
-        var block = args.Collectable as Block;
-        scoreArgs.ScorePosition = block.transform.position == null ?
-                                    Vector3.zero :
-                                    block.transform.position;
+        scoreArgs.ScorePosition = args.Collectable.transform.position;
 
         EventBus.RaiseEvent<IScoreEarnedHandler>(x => x.ProcessScoreData(scoreArgs));
     }

@@ -2,7 +2,7 @@
 using EventBusSystem;
 using System.Collections;
 
-public interface ICollectable
+public interface ICollectable : IComponent
 {
     void Collect(NoteCollectArgs args);
 }

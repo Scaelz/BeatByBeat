@@ -43,8 +43,8 @@ public class GameController : MonoBehaviour
 
         _controllers.Initialize();
 
+        var scoreController = new ScoreController(_globalData.ScoreData);
         var trigger = new TriggerActivationController(player, _globalData.PlayerData.TriggerTimeMilliseconds);
-
         var collectionController = new NoteCollectController(_globalData.BlockData, blockPool);
     }
 
@@ -54,8 +54,6 @@ public class GameController : MonoBehaviour
         var player = playerFactory.Create();
         return player;
     }
-
-
 
     // Update is called once per frame
     void Update()
