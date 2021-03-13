@@ -33,7 +33,7 @@ public class Block : MonoBehaviour, IBlock, ICollectable
         gameObject.SetActive(true);
         _shine.transform.localScale = new Vector3(
             _shine.transform.localScale.x,
-            1,
+            0,
             _shine.transform.localScale.z);
     }
 
@@ -44,8 +44,8 @@ public class Block : MonoBehaviour, IBlock, ICollectable
 
     public void Revert()
     {
-
-        gameObject.SetActive(false);
+        if (gameObject != null)
+            gameObject.SetActive(false);
     }
 
     public void SetMaterial(Material material)
@@ -88,11 +88,11 @@ public class Block : MonoBehaviour, IBlock, ICollectable
         float t = 0;
         while (t < 1)
         {
-            var intensity = Mathf.Lerp(end, start, t);
+            var intensity = Mathf.Lerp(start, end, t);
             //var colorIntensity = intensity * 3;
-            var colorIntensity = 0;
-            Color newColor = new Color(currentColor.r * colorIntensity, currentColor.g * colorIntensity, currentColor.b * colorIntensity);
-            _renderer.material.SetColor("EColor", newColor);
+            //var colorIntensity = 0;
+            //Color newColor = new Color(currentColor.r * colorIntensity, currentColor.g * colorIntensity, currentColor.b * colorIntensity);
+            //_renderer.material.SetColor("EColor", newColor);
             _shineMaterial.SetFloat("Intensity", intensity);
             _shine.transform.localScale = new Vector3(
                 _shine.transform.localScale.x,

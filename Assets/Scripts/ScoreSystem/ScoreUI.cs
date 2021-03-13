@@ -24,6 +24,12 @@ public class ScoreUI : MonoBehaviour, IScoreEarnedHandler
     {
         StopAllCoroutines();
         StartCoroutine(ConsistenlyUpdateScore(args.Total));
+        UpdateMultiplier(args.Multiplier);
+    }
+
+    void UpdateMultiplier(int multiplier)
+    {
+        _multiplier.text = "x" + multiplier.ToString();
     }
 
     IEnumerator ConsistenlyUpdateScore(int score)

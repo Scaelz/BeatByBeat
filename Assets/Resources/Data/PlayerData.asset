@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1932106993026068052, guid: 81d057dd6c33c68449ffd7627e3ec378, type: 3}
   startPosition: {x: -2.625, y: 0, z: 0}
-  speed: 0.45
+  speed: 0.55
   TriggerTimeMilliseconds: 100

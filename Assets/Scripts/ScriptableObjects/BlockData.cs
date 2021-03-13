@@ -20,4 +20,5 @@ public class BlockData : ScriptableObject
     public BlockMaterial[] BlockMaterials;
     public int PrewarmCount = 10;
     public float CollectTime = 1;
+    public float DestroyTime = 5;
 }

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: galaxy_mat
+  m_Shader: {fileID: -6465566751694194690, guid: 5a0af638186d2ce47a0bd51de2d5fe5d, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_E1E96349:
+        m_Texture: {fileID: 2800000, guid: b6c3e3082dfae22488c6e687b1aad963, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_3903B7CD_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 4cb30574bf343e34587be127ec8bce26, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_8333A01D: 0
+    - Vector1_C4F21005: 1
+    - Vector1_C6DB47D8: 0.6
+    - Vector1_D95EDAB5: -4.26
+    - Vector1_F5630359: 2.5
+    m_Colors:
+    - Color_329F1574: {r: 0, g: 1, b: 0.3914628, a: 0}
+    - Color_785F0A70: {r: 47.937256, g: 1.254902, b: 42.666668, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &7043785527358772423
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2

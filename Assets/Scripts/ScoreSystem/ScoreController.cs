@@ -23,15 +23,17 @@ public class ScoreController : IController, INoteCollectedHandler
         var accuracy = args.Accuracy;
         var scoreArgs = new ScoreEarnedArgs();
 
-        if (accuracy >= 0.5f)
+        if (accuracy >= 0.7f)
         {
             scoreArgs.Rate = ScoreRate.Poor;
+            _currentMultiplier = 1;
         }
-        else if (accuracy >= 0.2f && accuracy < 0.5f)
+        else if (accuracy >= 0.45f && accuracy < 0.7f)
         {
             scoreArgs.Rate = ScoreRate.Good;
+            _currentMultiplier = 1;
         }
-        else if (accuracy > 0 && accuracy < 0.2f)
+        else if (accuracy > 0 && accuracy < 0.45f)
         {
             scoreArgs.Rate = ScoreRate.Perfect;
             if (_currentMultiplier != _scoreData.maxMultiplier)
@@ -41,7 +43,6 @@ public class ScoreController : IController, INoteCollectedHandler
         {
             return;
         }
-
         scoreArgs.CurrentIncome = _scoreData.noteScore * _currentMultiplier;
         _totalScore += scoreArgs.CurrentIncome;
         scoreArgs.Total = _totalScore;
