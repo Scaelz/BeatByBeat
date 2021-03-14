@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: stars_mat
-  m_Shader: {fileID: -6465566751694194690, guid: 41275395d0a7a33428894380d953747b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: c39c6329921743b48964121c7e86f997, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -31,6 +31,6 @@ Material:
     - Vector1_4B6D6451: 0.07
     - Vector1_8B4169D2: 0.1
     m_Colors:
-    - Color_36F4E522: {r: 1, g: 1, b: 1, a: 0}
-    - Color_CF8959F1: {r: 0.5506853, g: 0.7075472, b: 0.6547846, a: 0}
+    - Color_36F4E522: {r: 0.5019608, g: 2.9176471, b: 5.992157, a: 0.87058824}
+    - Color_CF8959F1: {r: 3.5376291, g: 3.6981132, b: 3.6459558, a: 0}
   m_BuildTextureStacks: []

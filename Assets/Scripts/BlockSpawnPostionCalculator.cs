@@ -32,7 +32,7 @@ public class BlockSpawnPostionCalculator : IBeatReadyHandler
     public void OnBeatReady(Note note)
     {
         var movePoint = _movePoints.Where(x => x.note == note).FirstOrDefault();
-        var offsetDistance = new Vector3(0, 0.0f, _blockData.timeToReachPlayer * _blockData.speed);
+        var offsetDistance = new Vector3(0, 0.2f, _blockData.timeToReachPlayer * _blockData.speed);
         var spawnPoint = movePoint.transform.position + offsetDistance;
         var args = new SpawnArgs() { position = spawnPoint, note = note };
         EventBus.RaiseEvent<IBlockSpawnRequestHandler>(x => x.Spawn(args));

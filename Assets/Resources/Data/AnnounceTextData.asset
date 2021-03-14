@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22bbe655d77ac64cbb39816bd979f0a, type: 3}
+  m_Name: AnnounceTextData
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 0}
+  DefaultX: 2000
+  InPositionX: 0
+  InTime: 0.75
+  InEase: 24
+  OutPositionX: -2000
+  OutTime: 0.4
+  OutEase: 33

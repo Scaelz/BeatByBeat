@@ -1,13 +1,13 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using UnityEngine;
+﻿using UnityEngine;
 using EventBusSystem;
 using System.Linq;
 
-public class BlockSpawnerController : IController, IBlockSpawnRequestHandler
+public class BlockSpawnerController<T> : IController, IBlockSpawnRequestHandler
+where T : MonoBehaviour, IBlock
 {
-    Pool<Block> _blockPool;
+    Pool<T> _blockPool;
     BlockData _blockData;
-    public BlockSpawnerController(Pool<Block> blockPool, BlockData blockData)
+    public BlockSpawnerController(Pool<T> blockPool, BlockData blockData)
     {
         EventBus.Subscribe(this);
         _blockPool = blockPool;

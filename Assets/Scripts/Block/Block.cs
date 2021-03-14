@@ -44,13 +44,12 @@ public class Block : MonoBehaviour, IBlock, ICollectable
 
     public void Revert()
     {
-        if (gameObject != null)
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void SetMaterial(Material material)
     {
-        _renderer.material = material;
+        _renderer.sharedMaterial = material;
         _shineMaterial.SetFloat("Intensity", 1);
         _shineMaterial.SetColor("EColor", _renderer.material.GetColor("EColor"));
     }

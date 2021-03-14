@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using EventBusSystem;
 using System.Threading;
@@ -39,7 +37,8 @@ public class NoteCollectController : IController, INoteCollectedHandler
     async void RestoreNote(Block obj)
     {
         await Task.Run(() => Timer());
-        _blockPool.ResetMember(obj);
+        if (Application.isPlaying)
+            _blockPool.ResetMember(obj);
     }
     void Timer()
     {

@@ -22,6 +22,7 @@ public class SongController : IController, IInitializeable, IFrameUpdate
     private readonly INoteProvider _noteProvider;
     private readonly float _delay;
     private bool _loadComplete;
+    private bool _songIsEnded = false;
     private float _delayTimer = 0;
 
 
@@ -36,9 +37,14 @@ public class SongController : IController, IInitializeable, IFrameUpdate
 
     public void FrameUpdate(float deltaTime)
     {
+        if (!_mockSource.isPlaying && _hearableSource.isPlaying)
+        {
+            _songIsEnded = true;
+        }
+
         if (_loadComplete)
         {
-            if (!_mockSource.isPlaying)
+            if (!_mockSource.isPlaying && !_songIsEnded)
             {
                 _mockSource.Play();
             }
@@ -47,15 +53,23 @@ public class SongController : IController, IInitializeable, IFrameUpdate
                 _hearableSource.Play();
             }
             int indexToPlot = getIndexFromTime(_mockSource.time) / 1024;
-            if (_preProcessedSpectralFluxAnalyzer.spectralFluxSamples[indexToPlot].isPeak)
+            try
             {
-                if (_spawnedIndex != indexToPlot)
+                if (_preProcessedSpectralFluxAnalyzer.spectralFluxSamples[indexToPlot].isPeak)
                 {
-                    _spawnedIndex = indexToPlot;
-                    Note note = _noteProvider.GetNote();
-                    EventBus.RaiseEvent<IBeatReadyHandler>(x => x.OnBeatReady(note));
+                    if (_spawnedIndex != indexToPlot)
+                    {
+                        _spawnedIndex = indexToPlot;
+                        Note note = _noteProvider.GetNote();
+                        EventBus.RaiseEvent<IBeatReadyHandler>(x => x.OnBeatReady(note));
+                    }
                 }
             }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                _loadComplete = false;
+            }
+
         }
     }
 

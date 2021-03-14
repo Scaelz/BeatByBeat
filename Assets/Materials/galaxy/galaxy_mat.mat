@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: galaxy_mat
-  m_Shader: {fileID: -6465566751694194690, guid: 5a0af638186d2ce47a0bd51de2d5fe5d, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: cfdaf640f1e8e5c42ac643b844e3fcdd, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_249EECD1:
+        m_Texture: {fileID: 2800000, guid: b6c3e3082dfae22488c6e687b1aad963, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_E1E96349:
         m_Texture: {fileID: 2800000, guid: b6c3e3082dfae22488c6e687b1aad963, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -28,14 +32,21 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_266C7B87: 0
+    - Vector1_749CC90C: 0.1
     - Vector1_8333A01D: 0
+    - Vector1_A68374A8: 1
+    - Vector1_C0CD92B5: 0.1
     - Vector1_C4F21005: 1
     - Vector1_C6DB47D8: 0.6
     - Vector1_D95EDAB5: -4.26
+    - Vector1_E40C094B: 2
     - Vector1_F5630359: 2.5
     m_Colors:
     - Color_329F1574: {r: 0, g: 1, b: 0.3914628, a: 0}
+    - Color_3D72F5B: {r: 0, g: 1, b: 0.7411765, a: 0}
     - Color_785F0A70: {r: 47.937256, g: 1.254902, b: 42.666668, a: 0}
+    - Color_A7121529: {r: 19.486408, g: 10.575714, b: 0.9927022, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7043785527358772423
 MonoBehaviour:

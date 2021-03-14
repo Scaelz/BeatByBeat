@@ -15,3 +15,4 @@ MonoBehaviour:
   PlayerDataPath: PlayerData
   BlockDataPath: BlockData
   ScoreDataPath: ScoreData
+  MusicDataPath: MusicData

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 5505496322575122995, guid: d1315cc76d00a194f95d285f72c138ca, type: 3}
   ShutteredPrefab: {fileID: 0}
-  timeToReachPlayer: 3.5
+  timeToReachPlayer: 10
   spawnOffset: {x: 0, y: 0.5, z: 20}
   moveDirection: {x: 0, y: 0, z: -1}
-  speed: 8
+  speed: 6
   BlockMaterials:
   - Note: 0
     Material: {fileID: 2100000, guid: 67c47c9b9de6ded429168caa91f8d47a, type: 2}

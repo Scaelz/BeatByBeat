@@ -9,6 +9,7 @@ public class GlobalData : ScriptableObject
     public string PlayerDataPath;
     public string BlockDataPath;
     public string ScoreDataPath;
+    public string MusicDataPath;
     private PlayerData _playerData;
     public PlayerData PlayerData
     {
@@ -43,6 +44,18 @@ public class GlobalData : ScriptableObject
                 _scoreData = Load<ScoreData>("Data/" + ScoreDataPath);
             }
             return _scoreData;
+        }
+    }
+    private MusicData _musicData;
+    public MusicData MusicData
+    {
+        get
+        {
+            if (_musicData == null)
+            {
+                _musicData = Load<MusicData>("Data/" + MusicDataPath);
+            }
+            return _musicData;
         }
     }
     public T Load<T>(string path) where T : Object
