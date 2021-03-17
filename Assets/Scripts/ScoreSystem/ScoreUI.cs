@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using EventBusSystem;
-public class ScoreUI : MonoBehaviour, IScoreEarnedHandler
+public class ScoreUI : MonoBehaviour, IScoreEarnedHandler, IApplicationRequestHandler
 {
     [SerializeField]
     TextMeshProUGUI _globalScore;
@@ -38,13 +40,18 @@ public class ScoreUI : MonoBehaviour, IScoreEarnedHandler
         {
             currentScoreValue++;
             var scoreText = currentScoreValue.ToString();
-            for (int i = 0; i <= 5 - scoreText.Length; i++)
-            {
-                scoreText = scoreText.Insert(0, "0");
-            }
-            _globalScore.text = scoreText + " pts";
+            _globalScore.text = String.Concat(Enumerable.Repeat("0", 5 - scoreText.Length)) + scoreText + " pts";
 
             yield return null;
+        }
+    }
+
+    public void ApplycationRequestHandle(ApplicationRequest request)
+    {
+        if (request == ApplicationRequest.Reload)
+        {
+            _globalScore.text = "00000 pts";
+            _multiplier.text = "1x";
         }
     }
 }

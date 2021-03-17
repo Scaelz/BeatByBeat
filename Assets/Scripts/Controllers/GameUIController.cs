@@ -1,39 +1,84 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
+﻿using EventBusSystem;
 using UnityEngine;
-using EventBusSystem;
 using DG.Tweening;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections;
 
-public enum UIPanel
-{
-    TrackSelection,
-    Loading,
-    EndGame,
-    None
-}
-
-public class GameUIController : MonoBehaviour
+public class GameUIController : MonoBehaviour, ITrackIsOverHandler
 {
     [SerializeField]
     GameObject _trackSelectionPanel;
     [SerializeField]
     GameObject _loadingPanel;
-    UIPanel _currentPanel = UIPanel.TrackSelection;
+    [SerializeField]
+    GameObject _endGamePanel;
+    [SerializeField]
+    Image _progressFill;
 
-    private void Update()
+    UIPanel _currentPanel = UIPanel.TrackSelection;
+    float _barPercent;
+
+    public void Init(Button trackButton, AudioClip[] trackList)
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        EventBus.Subscribe(this);
+        foreach (var track in trackList)
         {
-            ShowPanel(UIPanel.TrackSelection);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            ShowPanel(UIPanel.Loading);
+            var button = Instantiate(trackButton, _trackSelectionPanel.transform);
+            button.GetComponentInChildren<TextMeshProUGUI>().text = track.name;
+            button.onClick.AddListener(() => TrackButtonClick(track));
         }
     }
 
-    public void NotePressed(NoteButton noteButton)
+    private void OnDestroy()
     {
-        EventBus.RaiseEvent<IUserInputHandler>(x => x.UpdatePlayerDestination(noteButton.note));
+        EventBus.Unsubscribe(this);
+    }
+
+    public void CloseSession()
+    {
+        ShowPanel(UIPanel.EndGame);
+    }
+
+    public void EndGameButtonClick(int option)
+    {
+        if (option == 0)
+        {
+            ShowPanel(UIPanel.None);
+        }
+        EventBus.RaiseEvent<IApplicationRequestHandler>(
+            x => x.ApplycationRequestHandle((ApplicationRequest)option));
+    }
+
+    void TrackButtonClick(AudioClip clip)
+    {
+        ShowPanel(UIPanel.Loading);
+        EventBus.RaiseEvent<ITrackSelectedHandler>(x => x.PrepareTrack(clip, UpdateProgressBar));
+    }
+
+    void UpdateProgressBar(float percent)
+    {
+        _barPercent = percent * 0.01f;
+    }
+
+    private void Update()
+    {
+        if (_progressFill.fillAmount != _barPercent)
+        {
+            _progressFill.fillAmount = _barPercent;
+        }
+        if (_barPercent == 1)
+        {
+            StartCoroutine(DelayedHideLoadPanel());
+        }
+    }
+
+    IEnumerator DelayedHideLoadPanel()
+    {
+        _barPercent = 0;
+        yield return null;
+        ShowPanel(UIPanel.None);
+        yield return new WaitForSeconds(2);
     }
 
     private GameObject PickPanelGO(UIPanel uiPanel)
@@ -45,7 +90,7 @@ public class GameUIController : MonoBehaviour
             case UIPanel.Loading:
                 return _loadingPanel;
             case UIPanel.EndGame:
-                return _loadingPanel;
+                return _endGamePanel;
             default:
                 return null;
         }
@@ -58,8 +103,12 @@ public class GameUIController : MonoBehaviour
         }
         GameObject panelGO = PickPanelGO(uiPanel);
         HideCurrentPanel();
-        panelGO.transform.DOLocalMoveX(0, 0.75f).SetEase(Ease.OutElastic);
         _currentPanel = uiPanel;
+        if (panelGO == null)
+        {
+            return;
+        }
+        panelGO.transform.DOLocalMoveX(0, 0.75f).SetEase(Ease.OutElastic);
     }
 
     public void HidePanel(UIPanel uiPanel)

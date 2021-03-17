@@ -16,3 +16,4 @@ MonoBehaviour:
   BlockDataPath: BlockData
   ScoreDataPath: ScoreData
   MusicDataPath: MusicData
+  UIDataPath: UIData

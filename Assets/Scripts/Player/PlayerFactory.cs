@@ -15,7 +15,7 @@ public class PlayerFactory<T> : IFactory<T> where T : MonoBehaviour, IPlayer
     {
         var playerObject = GameObject.Instantiate(_playerData.Prefab);
         var playerComponent = playerObject.AddComponent<T>();
-        playerComponent.Destination = _playerData.startPosition;
+        playerComponent.SetStartPosition(_playerData.startPosition);
         playerComponent.Speed = _playerData.speed;
         return playerComponent;
     }

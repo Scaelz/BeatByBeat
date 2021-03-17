@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using EventBusSystem;
+﻿using EventBusSystem;
 
-public class ScoreController : IController, INoteCollectedHandler
+public class ScoreController : IController, INoteCollectedHandler, IApplicationRequestHandler
 {
     ScoreData _scoreData;
     int _currentMultiplier = 1;
@@ -16,6 +15,15 @@ public class ScoreController : IController, INoteCollectedHandler
     ~ScoreController()
     {
         EventBus.Unsubscribe(this);
+    }
+
+    public void ApplycationRequestHandle(ApplicationRequest request)
+    {
+        if (request == ApplicationRequest.Reload)
+        {
+            _totalScore = 0;
+            _currentMultiplier = 1;
+        }
     }
 
     public void CollectNote(NoteCollectArgs args)

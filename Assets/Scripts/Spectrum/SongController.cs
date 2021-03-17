@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
 using System.Numerics;
 using DSPLib;
 using EventBusSystem;
+using System.Threading.Tasks;
 
-public class SongController : IController, IInitializeable, IFrameUpdate
+public class SongController : IController, IFrameUpdate, ITrackSelectedHandler
 {
     int _spawnedIndex = -10;
     int _numChannels;
@@ -33,6 +33,18 @@ public class SongController : IController, IInitializeable, IFrameUpdate
         this._hearableSource = hearableSource;
         this._noteProvider = noteProvider;
         this._delay = delay;
+        EventBus.Subscribe(this);
+    }
+
+    ~SongController()
+    {
+        EventBus.Unsubscribe(this);
+    }
+
+    public void RepeatTrack()
+    {
+        _loadComplete = true;
+        _songIsEnded = false;
     }
 
     public void FrameUpdate(float deltaTime)
@@ -68,9 +80,22 @@ public class SongController : IController, IInitializeable, IFrameUpdate
             catch (System.ArgumentOutOfRangeException)
             {
                 _loadComplete = false;
+                MusicIsComplete();
             }
 
         }
+    }
+
+    async void MusicIsComplete()
+    {
+        var time = (int)TimeSpan.FromSeconds(_delay).TotalMilliseconds;
+        await Task.Run(() => Timer(time));
+        EventBus.RaiseEvent<ITrackIsOverHandler>(x => x.CloseSession());
+    }
+
+    void Timer(int msTimeout)
+    {
+        Thread.Sleep(msTimeout);
     }
 
     public int getIndexFromTime(float curTime)
@@ -85,7 +110,7 @@ public class SongController : IController, IInitializeable, IFrameUpdate
         return ((1f / (float)this._sampleRate) * index);
     }
 
-    public void getFullSpectrumThreaded()
+    public void getFullSpectrumThreaded(Action<float> callback)
     {
         try
         {
@@ -139,9 +164,11 @@ public class SongController : IController, IInitializeable, IFrameUpdate
 
                 // Send our magnitude data off to our Spectral Flux Analyzer to be analyzed for peaks
                 _preProcessedSpectralFluxAnalyzer.analyzeSpectrum(Array.ConvertAll(scaledFFTSpectrum, x => (float)x), curSongTime);
+                callback((i * 100) / iterations);
             }
 
-            Debug.Log("Spectrum Analysis done");
+            callback(100);
+            //Debug.Log("Spectrum Analysis done");
             //Debug.Log("Background Thread Completed");
             _loadComplete = true;
         }
@@ -152,8 +179,11 @@ public class SongController : IController, IInitializeable, IFrameUpdate
         }
     }
 
-    public void Initialize()
+    public void PrepareTrack(AudioClip clip, Action<float> callback)
     {
+        _mockSource.clip = clip;
+        _hearableSource.clip = clip;
+
         _preProcessedSpectralFluxAnalyzer = new SpectralFluxAnalyzer();
         // Need all audio samples.  If in stereo, samples will return with left and right channels interweaved
         // [L,R,L,R,L,R]
@@ -168,7 +198,7 @@ public class SongController : IController, IInitializeable, IFrameUpdate
         _mockSource.clip.GetData(_multiChannelSamples, 0);
         //Debug.Log("GetData done");
 
-        Thread bgThread = new Thread(this.getFullSpectrumThreaded);
+        Thread bgThread = new Thread(() => this.getFullSpectrumThreaded(callback));
 
         //Debug.Log("Starting Background Thread");
         bgThread.Start();
